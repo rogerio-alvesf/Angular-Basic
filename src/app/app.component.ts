@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
-// import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CourseListComponent } from './courses/course-list.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   imports: [
-    // RouterOutlet,
-    FormsModule,
-    CourseListComponent,
+    RouterOutlet,
+    NavBarComponent,
+    FormsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'angular-basic';
-
-  name: string = 'Rogerio';
 }
