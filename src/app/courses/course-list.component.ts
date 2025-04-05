@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Course } from './course';
 import { Star } from '../star/star.component';
 import { CourseService } from './courses.services';
@@ -12,9 +12,12 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map, startWith } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { ReplacePipe } from '../pipe/replace.pipe';
+import { RouterLink } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   imports: [
+    RouterLink,
     ReplacePipe,
     CommonModule,
     MatTableModule,
@@ -25,13 +28,14 @@ import { ReplacePipe } from '../pipe/replace.pipe';
     MatAutocompleteModule,
     ReactiveFormsModule,
     AsyncPipe,
+    HttpClientModule
   ],
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.css'],
 })
 export class CourseListComponent implements OnInit {
   courses: Course[] = [];
-  dataSource = this.courses;
+  dataSource = new MatTableDataSource<Course>(this.courses);
   displayedColumns: string[] = [
     'imageUrl',
     'name',
@@ -40,17 +44,16 @@ export class CourseListComponent implements OnInit {
     'duration',
     'rating',
     'releaseDate',
+    'id',
   ];
 
   myControl = new FormControl('');
-
   filteredOptions: Observable<Course[]> = new Observable();
 
   constructor(private courseService: CourseService) {}
 
   ngOnInit(): void {
-    this.courses = this.courseService.retrieveAll();
-    this.dataSource = [...this.courses];
+    this.retrieveAll();
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -58,10 +61,23 @@ export class CourseListComponent implements OnInit {
     );
   }
 
+  retrieveAll(): void {
+    this.courseService.retrieveAll().subscribe({
+      next: (_courses) => {
+        this.courses = _courses;
+        this.dataSource.data = this.courses;
+      },
+      error: (err) => console.log('Error: ', err),
+    });
+  }
+
   private _filter(value: string): Course[] {
     const filterValue = value.toLowerCase();
-    return this.courses.filter((course) =>
+
+    this.dataSource.data = this.courses.filter((course) =>
       course.name.toLowerCase().includes(filterValue)
     );
+
+    return this.dataSource.data;
   }
 }

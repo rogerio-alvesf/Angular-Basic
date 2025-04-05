@@ -10,6 +10,5 @@ import { routes } from './app.routes';
     RouterModule.forRoot(routes, { useHash: true }),
     AppComponent
   ],
-  providers: [],
 })
 export class AppModule { }
