@@ -44,7 +44,8 @@ export class CourseListComponent implements OnInit {
     'duration',
     'rating',
     'releaseDate',
-    'id',
+    'editWithId',
+    'deleteWithId',
   ];
 
   myControl = new FormControl('');
@@ -67,7 +68,17 @@ export class CourseListComponent implements OnInit {
         this.courses = _courses;
         this.dataSource.data = this.courses;
       },
-      error: (err) => console.log('Error: ', err),
+      error: (err) => console.error('Error: ', err),
+    });
+  }
+
+  deleteById(courseId: number): void {
+    this.courseService.deleteById(courseId).subscribe({
+      next: () => {
+        console.log("Delete with sucess");
+        this.retrieveAll();
+      },
+      error: err => console.error("Erro", err)
     });
   }
 
