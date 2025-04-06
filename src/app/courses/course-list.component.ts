@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Course } from './course';
-import { Star } from '../star/star.component';
 import { CourseService } from './courses.services';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ReplacePipe } from '../pipe/replace.pipe';
 import { RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { Star } from '../star/star.component';
 
 @Component({
   imports: [
@@ -21,18 +21,19 @@ import { HttpClientModule } from '@angular/common/http';
     ReplacePipe,
     CommonModule,
     MatTableModule,
-    Star,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
     AsyncPipe,
-    HttpClientModule
+    HttpClientModule,
+    Star
   ],
   templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.css'],
+  styleUrls: ['./course-list.component.css']
 })
+
 export class CourseListComponent implements OnInit {
   courses: Course[] = [];
   dataSource = new MatTableDataSource<Course>(this.courses);
