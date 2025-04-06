@@ -13,6 +13,6 @@ export class Star implements OnChanges {
 
 
     ngOnChanges(): void {
-        this.startWidth = this.ratting * 74 / 5;
+        this.startWidth = this.ratting * 66 / 5;
     }
 }

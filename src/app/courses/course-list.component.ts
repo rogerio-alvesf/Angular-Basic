@@ -10,10 +10,10 @@ import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs/internal/Observable';
 import { map, startWith } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { ReplacePipe } from '../pipe/replace.pipe';
+import { ReplacePipe } from '../shared/pipes/replace.pipe';
 import { RouterLink } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { Star } from '../star/star.component';
+import { Star } from '../shared/components/star/star.component';
 
 @Component({
   imports: [
