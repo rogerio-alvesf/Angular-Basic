@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CourseService } from './courses/courses.services';
+import { CoreModule } from './core/core.module';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    NavBarComponent,
+    CoreModule,
     FormsModule,
     HttpClientModule,
   ],

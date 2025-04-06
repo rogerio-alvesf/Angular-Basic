@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { CourseListComponent } from './courses/course-list.component';
 import { CourseInfoComponent } from './courses/course-info.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundComponent } from './core/components/not-found/not-found.component';
 
 export const routes: Routes = [
   {
